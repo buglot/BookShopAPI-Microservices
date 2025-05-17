@@ -4,7 +4,7 @@
     {
         public int CouponId { get; set; }
         public required string CouponCode { get; set; }
-        public double DiscountAmount { get; set; }
+        public required double DiscountAmount { get; set; }
         public int MinAmount { get; set; }
         public DateTime LastUpdated { get; set; }
     }

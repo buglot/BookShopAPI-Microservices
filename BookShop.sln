@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Services.CouponAPI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Services.AuthAPI", "BookShop.Services.AuthAPI\BookShop.Services.AuthAPI.csproj", "{CF666B48-A32F-4FD9-858D-A2DEDF206F2D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FontEnd", "FontEnd", "{0126D2FE-2438-45CD-84E3-383DF80A00E0}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BookShop-Web", "BookShop-Web\BookShop-Web.esproj", "{049FD94E-CBEB-EFB0-2B00-9A110D564197}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,12 @@ Global
 		{CF666B48-A32F-4FD9-858D-A2DEDF206F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF666B48-A32F-4FD9-858D-A2DEDF206F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF666B48-A32F-4FD9-858D-A2DEDF206F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{729C56C5-9A73-4E88-BCCC-B38886D6A315} = {39413078-7213-43B9-A869-3EE838E2616E}
 		{CF666B48-A32F-4FD9-858D-A2DEDF206F2D} = {39413078-7213-43B9-A869-3EE838E2616E}
+		{049FD94E-CBEB-EFB0-2B00-9A110D564197} = {0126D2FE-2438-45CD-84E3-383DF80A00E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EC78F58-DB41-45F5-9990-7919AD0233EC}
