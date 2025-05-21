@@ -34,6 +34,7 @@ const code = ref<HTMLInputElement | null>(null)
 const discount = ref<HTMLInputElement | null>(null)
 const minamout = ref<HTMLInputElement | null>(null)
 const route = useRouter()
+const token = useCookie("token")
 async function addCouponSubmit() {
     const couponCode = code.value?.value.trim() ?? ''
     const discountAmount = discount.value?.value.trim() ?? ''
@@ -49,17 +50,20 @@ async function addCouponSubmit() {
         couponCode,
         discountAmount: Number(discountAmount),
         minAmount: minAmountVal ? Number(minAmountVal) : 0,
-        lastUpdated:new Date()
+        lastUpdated: new Date()
     }
 
     console.log("🚀 Sending:", data)
 
-    const { data:response,error } = await useFetch<Response>(config.public.CouponBase, {
+    const { data: response, error } = await useFetch<Response<null>>(config.public.CouponBase, {
         method: "POST",
-        body: data, // ✅ ไม่ต้อง stringify เอง
+
+        headers: { Authorization: "Bearer " + token.value },
+
+        body: data,
     })
 
-    if (response.value?.isSucess==false) {
+    if (response.value?.isSucess == false) {
         alert(response.value?.message)
     } else {
         alert("เพิ่มคูปองสำเร็จ")

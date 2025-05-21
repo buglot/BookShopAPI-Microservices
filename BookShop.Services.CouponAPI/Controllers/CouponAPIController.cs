@@ -2,12 +2,14 @@
 using BookShop.Services.CouponAPI.Data;
 using BookShop.Services.CouponAPI.Model;
 using BookShop.Services.CouponAPI.Model.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShop.Services.CouponAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CouponAPIController : ControllerBase
     {
         private readonly AppDbContext _db;

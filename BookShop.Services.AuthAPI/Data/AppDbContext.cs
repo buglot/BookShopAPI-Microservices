@@ -8,6 +8,7 @@ namespace BookShop.Services.AuthAPI.Data
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
+
         }
         public DbSet<ApplicationUser>ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

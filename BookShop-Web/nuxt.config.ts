@@ -2,7 +2,7 @@
 import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
     compatibilityDate: '2025-05-15',
-    devtools: { enabled: true },
+    devtools: { enabled: false },
     css: ['~/assets/css/main.css'],
     vite: {
         plugins: [
@@ -21,7 +21,14 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiBase: process.env.NUXT_PUBLIC_API_BASE,
-            CouponBase:process.env.NUXT_PUBLIC_API_CouponBASE,
+            CouponBase: process.env.NUXT_PUBLIC_API_CouponBASE,
+            AuthBaseApiLogin: process.env.NUXT_PUBLIC_API_AUTH_LOGIN,
+            AuthBaseApiRegister: process.env.NUXT_PUBLIC_API_AUTH_REGISTER,
+        }
+    },
+    icon: {
+        serverBundle: {
+            collections: ['uil', 'mdi','maki'] 
         }
     }
 })

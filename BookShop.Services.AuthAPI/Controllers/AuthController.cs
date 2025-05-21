@@ -29,10 +29,30 @@ namespace BookShop.Services.AuthAPI.Controllers
             }
             return Ok(responseDto);
         }
-        [HttpPost]
-        public async Task<IActionResult> Login()
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody]  LoginRequestDto loginRequest)
         {
-            return Ok();
+            var data = await _authService.Login(loginRequest);
+            if (data.User == null)
+            {
+                responseDto.IsSucess = false;
+                responseDto.Message = "Email or Password is incorrect";
+                return BadRequest(responseDto);
+            }
+            responseDto.Result = data;
+            return Ok(responseDto);
+        }
+        [HttpPost("assignrole")]
+        public async Task<IActionResult> AssignRole([FromBody] RegisterationRequestDto model)
+        {
+            var data = await _authService.AssignRole(model.Email, model.Role);
+            if (data == null)
+            {
+                responseDto.IsSucess = false;
+                responseDto.Message = "Cant add role";
+                return BadRequest(responseDto);
+            }
+            return Ok(responseDto);
         }
     }
 }

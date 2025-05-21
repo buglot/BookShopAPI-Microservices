@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <NuxtLayout name="admin">
     <div v-if="pending">
       Loading...
     </div>
@@ -45,7 +45,7 @@
       <h3 class=" text-xl font-bold">Not Found Code : {{ code }}</h3>
       <NuxtLink class="text-lg underline" to="/Coupon">Get Back</NuxtLink>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
@@ -59,12 +59,19 @@ const { deleted } = route.query
 const deletequery = ref<boolean>(deleted == "true")
 const config = useRuntimeConfig()
 const code = route.params.code as string
-const { data, pending, error } = await useFetch<Response & { result: CouponResponse }>(config.public.apiBase + "/api/CouponAPI/GetCode/" + code)
+const token = useCookie("token")
+const { data, pending, error } = await useFetch<Response<CouponResponse>>(config.public.apiBase + "/api/CouponAPI/GetCode/" + code,
+  {
+    headers: {
+      Authorization: "Bearer " + token.value
+    }
+  })
 const coupon = computed(() => data.value?.result ?? null)
 const couponid = ref<HTMLInputElement | null>(null)
 const couponcode = ref<HTMLInputElement | null>(null)
 const discount = ref<HTMLInputElement | null>(null)
 const minamout = ref<HTMLInputElement | null>(null)
+
 async function updateSubmit() {
   console.log("🚀 Sending:")
   const couponCode = couponcode.value?.value.trim() ?? ''
@@ -78,28 +85,42 @@ async function updateSubmit() {
     lastUpdated: new Date()
   }
   console.log("🚀 Sending:", data)
-  const { data: response, error } = await useFetch<Response>(config.public.CouponBase, {
-    method: "PUT",
-    body: data,
-  })
-  if (response.value?.isSucess == false) {
-    alert(response.value?.message)
-  } else {
-    alert("update สำเร็จ")
-    window.location.reload();
+  try {
+    const response = await $fetch<Response<any>>(config.public.CouponBase, {
+      method: "PUT",
+      headers: { Authorization: "Bearer " + token.value },
+      body: data,
+    })
+    if (response.isSucess == false) {
+      alert(response.message)
+    } else {
+      alert("update สำเร็จ")
+      window.location.reload();
+    }
+  } catch (error: any) {
+    alert(error?.data?.message)
   }
+
 }
 async function deletesubmit() {
   if (confirm("are you sure for detele this code?") == true) {
-    const { data: response, error } = await useFetch<Response>(config.public.CouponBase + "?id=" + coupon.value?.couponId, {
-      method: "DELETE",
-    })
-    if (response.value?.isSucess == false) {
-      alert(response.value?.message)
-    } else {
-      alert("Delete สำเร็จ")
-      router.push("/Coupon")
+    try {
+      const data = await $fetch<Response<any>>(config.public.CouponBase, {
+        query: { id: coupon.value?.couponId },
+        headers: { Authorization: "Bearer " + token.value },
+        method: "DELETE",
+      })
+      if (data.isSucess == false) {
+        alert(data.message)
+      } else {
+        alert("Delete สำเร็จ")
+        router.push("/Coupon")
+      }
+    } catch (error: any) {
+      alert(error?.data?.message)
     }
+
+
   }
 }
 </script>
